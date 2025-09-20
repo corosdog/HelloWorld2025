@@ -11,6 +11,7 @@ class MainApp:
         self.app_window.mainloop()
 
     def create_widgets(self):
+        '''
         check_budg_img = Image.open('Icon_Check_Budget.jpg').resize((300, 300))
         check_budg_icon = ImageTk.PhotoImage(check_budg_img)
         check_budg_button = Button(self.app_window, image=check_budg_icon, text="Budget Tracker", compound=TOP) #, command=self.open_budget)
@@ -28,6 +29,7 @@ class MainApp:
         calc_button = Button(self.app_window, image=calc_icon, text="Calculator App", compound=TOP) #, command=self.open_calculator)
         calc_button.image = calc_icon
         calc_button.grid(row=1, column=1, padx=0, pady=0)
+        '''
 
 
         
