@@ -23,5 +23,10 @@ class spending_type:
     def set_amount(self, amount):
         self.amount = amount
 
+    def spend(self, spent):
+        self.budget_used += spent
+        if self.budget_used > self.amount:
+            print("You have spent more than your budget!")
+
     def calculate_budget_percentage(self):
-        return (self.amount / self.budget_used) * 100    
+        return (self.budget_used / self.amount) * 100    
