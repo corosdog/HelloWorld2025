@@ -22,4 +22,7 @@ class budget:
         return self.spending_categories[category_index]
 
     # TODO: Remove a spending category
-    # TODO: Add money spent to a spending category, and update the total remaining budget
+    def spend_money(self, spending_category, amount):
+        spending_category.spend(amount)
+        self.total_remaining -= amount
+        self.total_spent += amount
