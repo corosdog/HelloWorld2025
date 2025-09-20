@@ -5,7 +5,7 @@ from tkinter import Tk, StringVar, Entry, Label, Button, Text, Frame, Toplevel, 
 class MainApp:
     def __init__(self):
         self.app_window = Tk()
-        self.app_window.title("Main Application")
+        self.app_window.title("FinBuddy")
         self.app_window.geometry("617x660")
         self.create_widgets()
         self.app_window.mainloop()
