@@ -19,9 +19,15 @@ class MainApp:
 
         add_spending_img = Image.open('Icon_Spending_Type.png').resize((300, 300))
         add_spending_icon = ImageTk.PhotoImage(add_spending_img)
-        add_spending_button = Button(self.app_window, image=add_spending_icon, text="Modify Categories", compound=TOP) #, command=self.open_spending)
+        add_spending_button = Button(self.app_window, image=add_spending_icon, text="Add a Transaction", compound=TOP) #, command=self.open_spending)
         add_spending_button.image = add_spending_icon
         add_spending_button.grid(row=0, column=1, padx=0, pady=0)
+
+        config_budg_img = Image.open('Icon_Config_Budget.png').resize((300, 300))
+        config_budg_icon = ImageTk.PhotoImage(config_budg_img)
+        config_budg_button = Button(self.app_window, image=config_budg_icon, text="Configure Budget", compound=TOP) #, command=self.open_config()
+        config_budg_button.image = config_budg_icon
+        config_budg_button.grid(row=1, column=0, padx=0, pady=0)
 
         calc_icon_img = Image.open('Icon_Calculator.png').resize((300, 300))
         calc_icon = ImageTk.PhotoImage(calc_icon_img)
