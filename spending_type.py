@@ -25,11 +25,13 @@ class spending_type:
 
     def get_budget_used(self):
         return self.budget_used
-
+    
+    # Adds the money spent in a transaction in this spending category to the budget_used variable, prints in console if spent money exceeds amount
     def spend(self, spent):
         self.budget_used += spent
         if self.budget_used > self.amount:
             print("You have spent more than your budget!")
-
+    
+    # Returns a percentage of how much of the total budget has been spent
     def calculate_budget_percentage(self):
         return (self.budget_used / self.amount) * 100    
