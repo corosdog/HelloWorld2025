@@ -23,6 +23,9 @@ class spending_type:
     def set_amount(self, amount):
         self.amount = amount
 
+    def get_budget_used(self):
+        return self.budget_used
+
     def spend(self, spent):
         self.budget_used += spent
         if self.budget_used > self.amount:
