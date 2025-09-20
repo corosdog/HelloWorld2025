@@ -21,7 +21,15 @@ class budget:
     def get_spending_category(self, category_index):
         return self.spending_categories[category_index]
 
-    # TODO: Remove a spending category
+    def remove_spending_category(self, category_index):
+        if category_index == 0:
+            print("You cannot remove the unallocated spending category")
+            return
+        self.total_spent -= self.spending_categories[category_index].get_budget_used()
+        self.total_remaining += self.spending_categories[category_index].get_budget_used()
+        self.spending_categories[0].set_amount(self.spending_categories[0].get_amount() + self.spending_categories[category_index].get_amount())
+        self.spending_categories.pop(category_index)
+
     def spend_money(self, spending_category, amount):
         spending_category.spend(amount)
         self.total_remaining -= amount
