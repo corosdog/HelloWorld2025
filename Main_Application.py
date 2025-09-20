@@ -6,9 +6,13 @@ class MainApp:
     def __init__(self):
         self.app_window = Tk()
         self.app_window.title("FinBuddy")
-        self.app_window.geometry("617x660")
+        self.app_window.geometry("617x330")
         self.create_widgets()
         self.app_window.mainloop()
+
+    def open_budget(self):
+        subprocess.Popen([sys.executable, "NewApp.py"])
+
 
     def open_calculator(self):
         subprocess.Popen([sys.executable, 'AP_CSP_copy.py'])
@@ -16,10 +20,11 @@ class MainApp:
     def create_widgets(self):
         check_budg_img = Image.open('Icons/Icon_Check_Budget.jpg').resize((300, 300))
         check_budg_icon = ImageTk.PhotoImage(check_budg_img)
-        check_budg_button = Button(self.app_window, image=check_budg_icon, text="Budget Tracker", compound=TOP) #, command=self.open_budget)
+        check_budg_button = Button(self.app_window, image=check_budg_icon, text="Budget Tracker", compound=TOP, command=self.open_budget)
         check_budg_button.image = check_budg_icon
         check_budg_button.grid(row=0, column=0, padx=0, pady=0)
 
+        '''
         add_spending_img = Image.open('Icons/Icon_Spending_Type.png').resize((300, 300))
         add_spending_icon = ImageTk.PhotoImage(add_spending_img)
         add_spending_button = Button(self.app_window, image=add_spending_icon, text="Add a Transaction", compound=TOP) #, command=self.open_spending)
@@ -31,12 +36,13 @@ class MainApp:
         config_budg_button = Button(self.app_window, image=config_budg_icon, text="Configure Budget", compound=TOP) #, command=self.open_config()
         config_budg_button.image = config_budg_icon
         config_budg_button.grid(row=1, column=0, padx=0, pady=0)
+        '''
 
         calc_icon_img = Image.open('Icons/Icon_Calculator.png').resize((300, 300))
         calc_icon = ImageTk.PhotoImage(calc_icon_img)
         calc_button = Button(self.app_window, image=calc_icon, text="Calculator App", compound=TOP, command=self.open_calculator)
         calc_button.image = calc_icon
-        calc_button.grid(row=1, column=1, padx=0, pady=0)
+        calc_button.grid(row=0, column=1, padx=0, pady=0)
 
 
         

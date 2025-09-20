@@ -30,7 +30,7 @@ def pct(n: float) -> str:
 def clamp01(x: float) -> float:
     return max(0.0, min(1.0, x))
 
-
+@dataclass
 class Category:
     name: str
     limit: float
