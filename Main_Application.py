@@ -10,6 +10,9 @@ class MainApp:
         self.create_widgets()
         self.app_window.mainloop()
 
+    def open_calculator(self):
+        subprocess.Popen([sys.executable, 'AP_CSP_copy.py'])
+
     def create_widgets(self):
         check_budg_img = Image.open('Icons/Icon_Check_Budget.jpg').resize((300, 300))
         check_budg_icon = ImageTk.PhotoImage(check_budg_img)
@@ -31,7 +34,7 @@ class MainApp:
 
         calc_icon_img = Image.open('Icons/Icon_Calculator.png').resize((300, 300))
         calc_icon = ImageTk.PhotoImage(calc_icon_img)
-        calc_button = Button(self.app_window, image=calc_icon, text="Calculator App", compound=TOP) #, command=self.open_calculator)
+        calc_button = Button(self.app_window, image=calc_icon, text="Calculator App", compound=TOP, command=self.open_calculator)
         calc_button.image = calc_icon
         calc_button.grid(row=1, column=1, padx=0, pady=0)
 
