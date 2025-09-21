@@ -76,7 +76,7 @@ class BudgetApp(tk.Tk):
                 categories=[
                     Category("Food", 500, DOT_COLORS[0]),
                     Category("Rent", 1200, DOT_COLORS[1]),
-                    Category("Savings", 300, DOT_COLORS[2]),
+                    Category("Entertainment", 300, DOT_COLORS[2]),
                 ],
             )
 
