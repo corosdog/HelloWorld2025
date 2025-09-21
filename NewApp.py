@@ -8,6 +8,7 @@ from tkinter import ttk, messagebox
 from dataclasses import dataclass, field
 from typing import List, Dict
 import math
+import pickle
 
 
 BG_APP = "#f6f5ff"         # app background (very light purple)
@@ -51,14 +52,33 @@ class BudgetApp(tk.Tk):
         self.title("Budget Tracker")
         self.geometry("1100x740")
         self.configure(bg=BG_APP)
-        self.state = AppState(
-            income=0.0,
-            categories=[
-                Category("Food", 500, DOT_COLORS[0]),
-                Category("Rent", 1200, DOT_COLORS[1]),
-                Category("Savings", 300, DOT_COLORS[2]),
-            ],
-        )
+        try:
+            file = open("Saved_Data.DAT", "rb")
+            self.data = pickle.load(file)
+            file.close()
+            print(self.data)
+            '''
+            self.state = AppState(
+                income = self.data["income"],
+                categories = [
+                    
+                ]
+            )
+            '''
+            self.state = AppState(
+                income=self.data.get("income", 0.0),
+                categories=[Category(**c) for c in self.data.get("categories", [])],
+                transactions=self.data.get("transactions", [])
+                )
+        except:
+            self.state = AppState(
+                income=0.0,
+                categories=[
+                    Category("Food", 500, DOT_COLORS[0]),
+                    Category("Rent", 1200, DOT_COLORS[1]),
+                    Category("Savings", 300, DOT_COLORS[2]),
+                ],
+            )
 
         # ttk theme setup
         style = ttk.Style(self)
@@ -95,7 +115,13 @@ class BudgetApp(tk.Tk):
             self.frames[F.__name__] = frame
             frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-        self.show("SetupPage")
+        try:
+            file = open("Saved_Data.DAT", "rb")
+            self.data = pickle.load(file)
+            file.close()
+            self.show("DashboardPage")
+        except:
+            self.show("SetupPage")
 
     def show(self, name: str):
         self.frames[name].tkraise()
@@ -123,6 +149,7 @@ class BudgetApp(tk.Tk):
         messagebox.showinfo("Saved", "Budget setup saved.")
         self.show("DashboardPage")
         self.frames["DashboardPage"].refresh()
+        self.data = app.export_for_mysql()
 
     def add_transaction(self, cat_name: str, desc: str, amount: float):
         cat = next((c for c in self.state.categories if c.name == cat_name), None)
@@ -133,6 +160,20 @@ class BudgetApp(tk.Tk):
         cat.spent += amount
         self.state.transactions.insert(0, {"category": cat_name, "desc": desc.strip() or "(no description)", "amount": amount})
         self.frames["DashboardPage"].refresh()
+        self.data = app.export_for_mysql()
+
+    def export_for_mysql(self):
+        """Prepare clean dicts/lists for MySQL insertion"""
+        return {"income": self.state.income, "categories": [ {
+                    "name": c.name,
+                    "limit": c.limit,
+                    "color": c.color,
+                    "spent": c.spent
+                }
+                for c in self.state.categories
+            ],
+            "transactions": self.state.transactions
+        }
 
 
 class SetupPage(tk.Frame):
@@ -437,3 +478,10 @@ class DashboardPage(tk.Frame):
 if __name__ == "__main__":
     app = BudgetApp()
     app.mainloop()
+    file = open("Saved_Data.DAT", "wb")
+    pickle.dump(app.data, file)
+    file.close()
+
+
+
+
