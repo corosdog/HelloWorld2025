@@ -11,11 +11,11 @@ class MainApp:
         self.app_window.mainloop()
 
     def open_budget(self):
-        subprocess.Popen([sys.executable, "NewApp.py"])
+        subprocess.Popen([sys.executable, "Dependent Files/NewApp.py"])
 
 
     def open_calculator(self):
-        subprocess.Popen([sys.executable, 'AP_CSP_copy.py'])
+        subprocess.Popen([sys.executable, 'Dependent Files/AP_CSP_copy.py'])
 
     def create_widgets(self):
         check_budg_img = Image.open('Icons/Icon_Check_Budget.jpg').resize((300, 300))
